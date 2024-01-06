@@ -1,0 +1,105 @@
+{
+    "count": 5987,
+    "page": 1,
+    "page_count": 24,
+    "page_size": 24,
+    "products": [
+        {
+            "code": "9100000824710",
+            "product_name": "bio-haselnuss-nougat-creme"
+        },
+        {
+            "code": "9001432038297",
+            "product_name": "Erdbeeren Konfitüre passiert"
+        },
+        {
+            "code": "11484981",
+            "product_name": "Bohnen"
+        },
+        {
+            "code": "5999033867092",
+            "product_name": "S-budget  majonéz"
+        },
+        {
+            "code": "9100000893334",
+            "product_name": "Knuspermüsli Schoko-Kürbis"
+        },
+        {
+            "code": "9100000709024",
+            "product_name": "Soja Drink ungesüßt"
+        },
+        {
+            "code": "9100000250007",
+            "product_name": "Vollmilch"
+        },
+        {
+            "code": "8710671155160",
+            "product_name": "Spreadup"
+        },
+        {
+            "code": "4099200023311",
+            "product_name": "Aprikosen getrocknet"
+        },
+        {
+            "code": "6001008155543",
+            "product_name": "full cream milk"
+        },
+        {
+            "code": "9100000449289",
+            "product_name": "Bio-Schlagobers"
+        },
+        {
+            "code": "9100000783482",
+            "product_name": "Choco Flakes"
+        },
+        {
+            "code": "8710671088420",
+            "product_name": "Pesto alla Genovese"
+        },
+        {
+            "code": "9100000750729",
+            "product_name": "Lasagneblätter Nudeln"
+        },
+        {
+            "code": "8710671088406",
+            "product_name": "Pesto Rosso"
+        },
+        {
+            "code": "9100000028903",
+            "product_name": ""
+        },
+        {
+            "code": "9100000747507",
+            "product_name": "Bio Linsen"
+        },
+        {
+            "code": "9100000835402",
+            "product_name": "Kakao Natur pur Bio"
+        },
+        {
+            "code": "9100000893358",
+            "product_name": "High Protein Knusper-Müsli Rote Beeren"
+        },
+        {
+            "code": "9100000744940",
+            "product_name": ""
+        },
+        {
+            "code": "9100000780696",
+            "product_name": "Pane guttiau"
+        },
+        {
+            "code": "9100000156767",
+            "product_name": "Bio Spaghetti"
+        },
+        {
+            "code": "8001300400684",
+            "product_name": "Coucous integrale"
+        },
+        {
+            "code": "9100000819488",
+            "product_name": "bio-jogurt heidelbeer"
+        }
+    ],
+    "skip": 0
+}

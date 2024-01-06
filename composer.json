@@ -1,0 +1,52 @@
+{
+    "name": "ccharz/openfoodfacts-php-reader",
+    "description": "Get Openfoodfacts Product Infos",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christian Charzewski",
+            "email": "chris@cw-software.at",
+            "role": "Developer"
+        }
+    ],
+    "keywords": [
+        "openfoodfacts",
+        "php",
+        "laravel"
+    ],
+    "require": {
+        "php": "^8.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10",
+        "guzzlehttp/guzzle": "^7.8",
+        "orchestra/testbench": "^8",
+        "laravel/pint": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ccharz\\LaravelOpenfoodfactsReader\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ccharz\\LaravelOpenfoodfactsReader\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "post-autoload-dump": [
+        ],
+        "lint": [
+            "@php vendor/bin/pint"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ccharz\\LaravelOpenfoodfactsReader\\LaravelOpenfoodfactsReaderServiceProvider"
+            ]
+        }
+    }
+}
