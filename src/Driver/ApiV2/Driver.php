@@ -31,8 +31,6 @@ class Driver implements DriverContract
                 ->get(self::URL.$url, $query)
                 ->throw()
                 ->json();
-
-            file_put_contents(__DIR__.'/result.json', json_encode($result, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
         } catch (Throwable $e) {
             throw new UnableToReadDataException('', 0, $e);
         }
@@ -44,7 +42,7 @@ class Driver implements DriverContract
         return $result;
     }
 
-    public function product(string $barcode): ?Product
+    public function product(string $barcode): ?OpenfoodfactsProduct
     {
         $product_data = $this->getFromAPI('product/'.$barcode);
 
@@ -52,7 +50,7 @@ class Driver implements DriverContract
             throw new ProductNotFoundException();
         }
 
-        return Product::fromArray($product_data['product']);
+        return new OpenfoodfactsProduct($product_data['product']);
     }
 
     public function search(array $parameters, int $page = 1, array $fields = ['code', 'product_name', 'product_name_de']): array

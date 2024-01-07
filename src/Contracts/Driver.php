@@ -12,7 +12,7 @@ interface Driver
      * @throws Ccharz\LaravelOpenfoodfactsReader\Exceptions\UnableToReadDataException
      * @throws Ccharz\LaravelOpenfoodfactsReader\Exceptions\ProductNotFoundException
      */
-    public function product(string $barcode): ?Product;
+    public function product(string $barcode): ?OpenfoodfactsProduct;
 
     /**
      * @throws Ccharz\LaravelOpenfoodfactsReader\Exceptions\UnableToReadDataException

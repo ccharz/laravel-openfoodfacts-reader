@@ -1,5 +1,5 @@
 {
-    "name": "ccharz/openfoodfacts-php-reader",
+    "name": "ccharz/laravel-openfoodfacts-reader",
     "description": "Get Openfoodfacts Product Infos",
     "license": "MIT",
     "authors": [

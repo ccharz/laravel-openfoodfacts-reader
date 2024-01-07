@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Ccharz\LaravelOpenfoodfactsReader\Tests;
 
 use Ccharz\LaravelOpenfoodfactsReader\Driver\ApiV2\Driver as ApiV2Driver;
-use Ccharz\LaravelOpenfoodfactsReader\Driver\ApiV2\Product as ApiV2Product;
+use Ccharz\LaravelOpenfoodfactsReader\Driver\ApiV2\OpenfoodfactsProduct as ApiV2OpenfoodfactsProduct;
 use Ccharz\LaravelOpenfoodfactsReader\Exceptions\ProductNotFoundException;
 use Ccharz\LaravelOpenfoodfactsReader\Exceptions\UnableToReadDataException;
 use Illuminate\Http\Client\Request;
@@ -54,10 +54,11 @@ class ApiV2DriverTest extends TestCase
         $driver = new ApiV2Driver();
         $result = $driver->product('3017620422003');
 
-        $this->assertInstanceOf(ApiV2Product::class, $result);
+        $this->assertInstanceOf(ApiV2OpenfoodfactsProduct::class, $result);
 
-        $this->assertTrue(isset($result->product_name_de));
         $this->assertSame('Nutella', $result->product_name_de);
+
+        $this->assertIsArray($result->data());
 
         Http::assertSent(function (Request $request) {
             return $request->hasHeader(

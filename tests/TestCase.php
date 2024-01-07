@@ -6,6 +6,13 @@ namespace Ccharz\LaravelOpenfoodfactsReader\Tests;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->setUpDatabase();
+    }
+
     /**
      * Get package providers.
      *
@@ -19,8 +26,20 @@ class TestCase extends \Orchestra\Testbench\TestCase
         ];
     }
 
+    protected function setUpDatabase()
+    {
+        $tableMigration = require __DIR__.'/../database/migrations/create_openfoodfacts_products_table.php.stub';
+
+        $tableMigration->up();
+    }
+
+    protected function getTestDataPath(string $filename): string
+    {
+        return __DIR__.'/__data__/'.$filename;
+    }
+
     protected function getTestData(string $filename): string
     {
-        return file_get_contents(__DIR__.'/__data__/'.$filename);
+        return file_get_contents($this->getTestDataPath($filename));
     }
 }

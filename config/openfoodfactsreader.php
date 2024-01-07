@@ -21,4 +21,36 @@ return [
     */
 
     'user_agent' => null,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Storage Disk
+    |--------------------------------------------------------------------------
+    |
+    | Disk on which the data of the local driver should be stored
+    |
+    */
+
+    'disk' => null,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Storage Path
+    |--------------------------------------------------------------------------
+    |
+    | Path in which the data of the local driver should be stored
+    |
+    */
+
+    'path' => 'openfoodfacts',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Product Model
+    |--------------------------------------------------------------------------
+    |
+    | Eloquent model if using the local driver
+    */
+
+    'model' => \Ccharz\LaravelOpenfoodfactsReader\Driver\Local\OpenfoodfactsProduct::class,
 ];

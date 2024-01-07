@@ -34,4 +34,11 @@ class LaravelOpenfoodfactsReaderTest extends TestCase
 
         $this->assertSame($test_2, $test);
     }
+
+    public function test_it_can_use_a_driver_by_string(): void
+    {
+        $test = app(LaravelOpenfoodfactsReader::class)->driver('v2');
+
+        $this->assertInstanceOf(ApiV2Driver::class, $test);
+    }
 }
