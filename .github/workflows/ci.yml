@@ -32,6 +32,7 @@ jobs:
       with:
         php-version: ${{ matrix.php }}
         coverage: pcov
+        extensions: sqlite
         tools: phpunit:${{ matrix.phpunit-versions }}
 
     - name: Install dependencies
