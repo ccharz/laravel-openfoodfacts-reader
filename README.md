@@ -1,6 +1,14 @@
 # Laravel Openfoodfacts Reader
 
-Read data from openfoodsfacts with a local driver and an api driver
+## Introduction
+
+Get product data from openfoodsfacts with a local driver and an api driver.
+
+## Requirements
+
+Laravel Openfoodfacts Reader requires PHP 8.2+ and Laravel 10.
+
+If you use the local driver currently around 50 GB of disk space are required.
 
 ## Installation
 

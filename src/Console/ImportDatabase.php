@@ -30,13 +30,21 @@ class ImportDatabase extends Command
 
     public function handle(): void
     {
+        $model = config('openfoodfactsreader.model');
+
         $file = $this->argument('file');
 
-        $model = config('openfoodfactsreader.model');
+        $bar = $this->output->createProgressBar();
+
+        $bar->start();
 
         foreach ($this->readFile($file) as $json) {
             $model::storeFromJson($json);
+
+            $bar->advance();
         }
+
+        $bar->finish();
 
         $this->info('Import finished');
     }
