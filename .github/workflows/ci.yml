@@ -32,6 +32,8 @@ jobs:
 
             - name: Install dependencies
               run: |
+                  composer remove "larastan/larastan" --dev --no-update
+                  composer remove "rector/rector" --dev --no-update
                   composer require "illuminate/contracts=^${{ matrix.laravel }}" --dev --no-update
                   composer update --prefer-dist --no-interaction --no-progress
 
