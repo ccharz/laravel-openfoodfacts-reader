@@ -4,18 +4,25 @@ declare(strict_types=1);
 
 namespace Ccharz\LaravelOpenfoodfactsReader\Tests;
 
+use Ccharz\LaravelOpenfoodfactsReader\LaravelOpenfoodfactsReaderServiceProvider;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\ServiceProvider;
+use Orchestra\Testbench\Attributes\WithEnv;
+
+#[WithEnv('DB_CONNECTION', 'testing')]
+
 class TestCase extends \Orchestra\Testbench\TestCase
 {
     /**
      * Get package providers.
      *
-     * @param  \Illuminate\Foundation\Application  $app
-     * @return array<int, class-string<\Illuminate\Support\ServiceProvider>>
+     * @param  Application  $app
+     * @return array<int, class-string<ServiceProvider>>
      */
     protected function getPackageProviders($app)
     {
         return [
-            \Ccharz\LaravelOpenfoodfactsReader\LaravelOpenfoodfactsReaderServiceProvider::class,
+            LaravelOpenfoodfactsReaderServiceProvider::class,
         ];
     }
 
@@ -39,9 +46,5 @@ class TestCase extends \Orchestra\Testbench\TestCase
         $tableMigration = require __DIR__.'/../database/migrations/create_openfoodfacts_products_table.php.stub';
 
         $tableMigration->up();
-
-        $this->beforeApplicationDestroyed(
-            fn () => $tableMigration->down()
-        );
     }
 }

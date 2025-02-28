@@ -4,18 +4,24 @@ declare(strict_types=1);
 
 namespace Ccharz\LaravelOpenfoodfactsReader\Contracts;
 
+use Ccharz\LaravelOpenfoodfactsReader\Exceptions\ProductNotFoundException;
+use Ccharz\LaravelOpenfoodfactsReader\Exceptions\UnableToReadDataException;
+
 interface Driver
 {
     /**
-     * @param  string  $barcode The barcode of the product to be fetched
+     * @param  string  $barcode  The barcode of the product to be fetched
      *
-     * @throws Ccharz\LaravelOpenfoodfactsReader\Exceptions\UnableToReadDataException
-     * @throws Ccharz\LaravelOpenfoodfactsReader\Exceptions\ProductNotFoundException
+     * @throws UnableToReadDataException
+     * @throws ProductNotFoundException
      */
     public function product(string $barcode): ?OpenfoodfactsProduct;
 
     /**
-     * @throws Ccharz\LaravelOpenfoodfactsReader\Exceptions\UnableToReadDataException
+     * @param  array<string,string>  $parameters
+     * @return array<string, mixed>
+     *
+     * @throws UnableToReadDataException
      */
     public function search(array $parameters): array;
 }

@@ -12,11 +12,10 @@ use Illuminate\Support\Facades\Storage;
 
 class OpenfoodfactsProduct extends Model implements OpenfoodfactsProductContract
 {
+    /**
+     * @var array<string, mixed>
+     */
     protected array $data;
-
-    public static array $search_parameters = [
-        'code',
-    ];
 
     /**
      * Indicates if the model's ID is auto-incrementing.
@@ -41,16 +40,27 @@ class OpenfoodfactsProduct extends Model implements OpenfoodfactsProductContract
         'imported_at' => 'datetime',
     ];
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getDataAttribute(): array
     {
         if (! isset($this->data)) {
-            $data = Storage::disk(config('openfoodfactsreader.disk'))
-                ->get(static::productDataPath($this->id));
-
-            $this->data = \json_decode($data, true, 512, JSON_THROW_ON_ERROR);
+            $this->data = Storage::disk(is_string(config('openfoodfactsreader.disk')) ? config('openfoodfactsreader.disk') : null)
+                ->json(static::productDataPath($this->id)) ?? [];
         }
 
         return $this->data;
+    }
+
+    /**
+     * @return list<string>
+     */
+    public static function searchParameters(): array
+    {
+        return [
+            'code',
+        ];
     }
 
     public function data(?string $key = null, mixed $default = null): mixed
@@ -79,14 +89,14 @@ class OpenfoodfactsProduct extends Model implements OpenfoodfactsProductContract
 
     public static function productDataPath(string $id): string
     {
-        return config('openfoodfactsreader.path').'/'.substr($id, 0, 3).'/'.$id.'.json';
+        return (is_string(config('openfoodfactsreader.path')) ? config('openfoodfactsreader.path').'/' : '').substr($id, 0, 3).'/'.$id.'.json';
     }
 
     public static function storeFromJson(string $json): void
     {
         $product = \json_decode($json, true, 512, JSON_THROW_ON_ERROR);
 
-        if (empty($product['_id'])) {
+        if (! is_array($product) || ! isset($product['_id']) || ! is_string($product['_id']) || $product['_id'] === '') {
             return;
         }
 
@@ -106,7 +116,7 @@ class OpenfoodfactsProduct extends Model implements OpenfoodfactsProductContract
             ['code', 'updated_at', 'imported_at']
         );
 
-        Storage::disk(config('openfoodfactsreader.disk'))
+        Storage::disk(is_string(config('openfoodfactsreader.disk')) ? config('openfoodfactsreader.disk') : '')
             ->put(self::productDataPath($id), $json);
     }
 }

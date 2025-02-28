@@ -26,11 +26,9 @@ class LaravelOpenfoodfactsReaderServiceProvider extends ServiceProvider
         }
     }
 
-    public function register()
+    public function register(): void
     {
-        $this->app->singleton(LaravelOpenfoodfactsReader::class, function () {
-            return new LaravelOpenfoodfactsReader();
-        });
+        $this->app->singleton(LaravelOpenfoodfactsReader::class, fn (): LaravelOpenfoodfactsReader => new LaravelOpenfoodfactsReader);
 
         $this->mergeConfigFrom(
             __DIR__.'/../config/openfoodfactsreader.php', 'openfoodfactsreader'

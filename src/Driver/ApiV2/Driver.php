@@ -14,6 +14,12 @@ class Driver implements DriverContract
 {
     const URL = 'https://world.openfoodfacts.org/api/v2/';
 
+    /**
+     * @param  array<mixed>  $query
+     * @return array<mixed>
+     *
+     * @throws UnableToReadDataException
+     */
     protected function getFromAPI(string $url, array $query = []): array
     {
         $user_agent = config('openfoodfactsreader.user_agent');
@@ -35,7 +41,7 @@ class Driver implements DriverContract
             throw new UnableToReadDataException('', 0, $e);
         }
 
-        if (empty($result)) {
+        if (! is_array($result) || $result === []) {
             throw new UnableToReadDataException('Empty result');
         }
 
@@ -47,12 +53,19 @@ class Driver implements DriverContract
         $product_data = $this->getFromAPI('product/'.$barcode);
 
         if (! isset($product_data['status']) || ($product_data['status'] !== 1) || ! isset($product_data['product'])) {
-            throw new ProductNotFoundException();
+            throw new ProductNotFoundException;
         }
 
         return new OpenfoodfactsProduct($product_data['product']);
     }
 
+    /**
+     * @param  array<string, string>  $parameters
+     * @param  array<string>  $fields
+     * @return array<string, mixed>
+     *
+     * @throws UnableToReadDataException
+     */
     public function search(array $parameters, int $page = 1, array $fields = ['code', 'product_name', 'product_name_de']): array
     {
         $search_result = $this->getFromAPI(
