@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Ccharz\LaravelOpenfoodfactsReader\Tests;
 
+use Orchestra\Testbench\Attributes\WithEnv;
+
+#[WithEnv('DB_CONNECTION', 'testing')]
+
 class TestCase extends \Orchestra\Testbench\TestCase
 {
     /**
@@ -39,9 +43,5 @@ class TestCase extends \Orchestra\Testbench\TestCase
         $tableMigration = require __DIR__.'/../database/migrations/create_openfoodfacts_products_table.php.stub';
 
         $tableMigration->up();
-
-        $this->beforeApplicationDestroyed(
-            fn () => $tableMigration->down()
-        );
     }
 }

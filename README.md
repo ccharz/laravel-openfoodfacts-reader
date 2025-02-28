@@ -12,16 +12,11 @@ If you use the local driver currently around 50 GB of disk space are required.
 
 ## Installation
 
-Install the package
-
-First publish the configuration using
+Install the package by
 
 ```
-php artisan vendor:publish --tag openfoodfactsreader-config
+composer require ccharz/laravel-openfoodfacts-reader
 ```
-
-and set the user agent. The User-Agent should be in the form of AppName/Version (ContactEmail). For example, MyApp/1.0 (contact@myapp.com).
-
 
 ## Drivers
 
@@ -71,7 +66,6 @@ In the config file of the package you can specify your class:
    'model' => App\Models\OpenfoodfactsProduct::class
 ...
 ```
-
 
 ### API V2
 

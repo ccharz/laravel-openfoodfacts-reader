@@ -7,7 +7,7 @@ namespace Ccharz\LaravelOpenfoodfactsReader\Contracts;
 interface Driver
 {
     /**
-     * @param  string  $barcode The barcode of the product to be fetched
+     * @param  string  $barcode  The barcode of the product to be fetched
      *
      * @throws Ccharz\LaravelOpenfoodfactsReader\Exceptions\UnableToReadDataException
      * @throws Ccharz\LaravelOpenfoodfactsReader\Exceptions\ProductNotFoundException

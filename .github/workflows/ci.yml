@@ -1,43 +1,39 @@
 name: Tests
 
-on:
-  push:
-    branches:
-    - "*"
-  pull_request:
-    branches:
-    - "*"
+on: [push]
 
 jobs:
-  php-tests:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    env:
-      COMPOSER_NO_INTERACTION: 1
+    php-tests:
+        runs-on: ubuntu-22.04
+        timeout-minutes: 15
+        env:
+            COMPOSER_NO_INTERACTION: 1
 
-    strategy:
-      fail-fast: true
-      matrix:
-        php: [8.2, 8.3]
-        phpunit-versions: ['10']
+        strategy:
+            fail-fast: true
+            matrix:
+                php: [8.2, 8.3, 8.4]
+                laravel: [10, 11, 12]
 
-    name: P${{ matrix.php }} - PHPUnit ${{ matrix.phpunit-versions }}
+        name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }}
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: ${{ matrix.php }}
-        coverage: pcov
-        extensions: sqlite
-        tools: phpunit:${{ matrix.phpunit-versions }}
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php }}
+                  extensions: mbstring gd
+                  ini-values: error_reporting=E_ALL
+                  tools: composer:v2
+                  coverage: none
 
-    - name: Install dependencies
-      run: |
-        composer install --prefer-dist
+            - name: Install dependencies
+              run: |
+                  composer require "illuminate/contracts=^${{ matrix.laravel }}" --dev --no-update
+                  composer update --prefer-dist --no-interaction --no-progress
 
-    - name: Execute Unit Tests
-      run: composer test
+            - name: Execute tests
+              run: vendor/bin/phpunit

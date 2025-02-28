@@ -51,7 +51,7 @@ class ApiV2DriverTest extends TestCase
             ->push($this->getTestData('product_01.json'))
         );
 
-        $driver = new ApiV2Driver();
+        $driver = new ApiV2Driver;
         $result = $driver->product('3017620422003');
 
         $this->assertInstanceOf(ApiV2OpenfoodfactsProduct::class, $result);
@@ -76,7 +76,7 @@ class ApiV2DriverTest extends TestCase
 
         $this->expectExceptionMessage('Empty result');
 
-        (new ApiV2Driver())->product('3017620422003');
+        (new ApiV2Driver)->product('3017620422003');
     }
 
     public function test_it_throws_without_product_result(): void
@@ -87,7 +87,7 @@ class ApiV2DriverTest extends TestCase
 
         $this->expectException(ProductNotFoundException::class);
 
-        (new ApiV2Driver())->product('3017620422003');
+        (new ApiV2Driver)->product('3017620422003');
     }
 
     public function test_it_throws_without_user_agent(): void
@@ -96,7 +96,7 @@ class ApiV2DriverTest extends TestCase
 
         $this->expectExceptionMessage('Missing user agent in configuration');
 
-        (new ApiV2Driver())->product('3017620422003');
+        (new ApiV2Driver)->product('3017620422003');
     }
 
     public function test_it_throws_with_error(): void
@@ -107,7 +107,7 @@ class ApiV2DriverTest extends TestCase
 
         $this->expectException(UnableToReadDataException::class);
 
-        (new ApiV2Driver())->product('3017620422003');
+        (new ApiV2Driver)->product('3017620422003');
     }
 
     public function test_it_can_search_a_product(): void
@@ -116,7 +116,7 @@ class ApiV2DriverTest extends TestCase
             ->push($this->getTestData('search_01.json'))
         );
 
-        $result = (new ApiV2Driver())->search(['brands_tags' => 'Spar']);
+        $result = (new ApiV2Driver)->search(['brands_tags' => 'Spar']);
 
         $this->assertCount(24, $result['data']);
         $this->assertSame(24, $result['meta']['last_page']);

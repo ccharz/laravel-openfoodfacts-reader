@@ -6,6 +6,4 @@ namespace Ccharz\LaravelOpenfoodfactsReader\Exceptions;
 
 use RuntimeException;
 
-final class UnableToReadDataException extends RuntimeException
-{
-}
+final class UnableToReadDataException extends RuntimeException {}

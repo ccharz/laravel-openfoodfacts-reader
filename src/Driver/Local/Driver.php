@@ -17,7 +17,7 @@ class Driver implements DriverContract
             ->first();
 
         if (! $product) {
-            throw new ProductNotFoundException();
+            throw new ProductNotFoundException;
         }
 
         return $product;

@@ -20,7 +20,7 @@ class LocalDriverTest extends TestCase
 
         OpenfoodfactsProduct::storeFromJson($this->getTestData('local_product_01.json'));
 
-        $driver = new LocalDriver();
+        $driver = new LocalDriver;
         $result = $driver->product('0000000001281');
 
         $this->assertInstanceOf(OpenfoodfactsProduct::class, $result);
@@ -34,14 +34,14 @@ class LocalDriverTest extends TestCase
     {
         $this->expectException(ProductNotFoundException::class);
 
-        (new LocalDriver())->product('3017620422003');
+        (new LocalDriver)->product('3017620422003');
     }
 
     public function test_it_can_search_a_product(): void
     {
         OpenfoodfactsProduct::storeFromJson($this->getTestData('local_product_01.json'));
 
-        $result = (new LocalDriver())->search(['code' => '0000000001281']);
+        $result = (new LocalDriver)->search(['code' => '0000000001281']);
 
         $this->assertCount(1, $result['data']);
         $this->assertSame(1, $result['meta']['last_page']);

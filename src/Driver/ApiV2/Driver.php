@@ -47,7 +47,7 @@ class Driver implements DriverContract
         $product_data = $this->getFromAPI('product/'.$barcode);
 
         if (! isset($product_data['status']) || ($product_data['status'] !== 1) || ! isset($product_data['product'])) {
-            throw new ProductNotFoundException();
+            throw new ProductNotFoundException;
         }
 
         return new OpenfoodfactsProduct($product_data['product']);

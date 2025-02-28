@@ -6,6 +6,4 @@ namespace Ccharz\LaravelOpenfoodfactsReader\Exceptions;
 
 use Exception;
 
-final class ProductNotFoundException extends Exception
-{
-}
+final class ProductNotFoundException extends Exception {}
