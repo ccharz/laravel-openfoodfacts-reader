@@ -9,11 +9,21 @@ use Ccharz\LaravelOpenfoodfactsReader\Exceptions\ProductNotFoundException;
 
 class Driver implements DriverContract
 {
-    public function product(string $barcode): OpenfoodfactsProduct
+    /**
+     * @return class-string<OpenfoodfactsProduct>
+     */
+    public function modelClass(): string
     {
+        /** @var class-string<OpenfoodfactsProduct> $model */
         $model = config('openfoodfactsreader.model');
 
-        $product = $model::where('code', $barcode)
+        return $model;
+    }
+
+    public function product(string $barcode): OpenfoodfactsProduct
+    {
+        $product = $this->modelClass()::query()
+            ->where('code', $barcode)
             ->first();
 
         if (! $product) {
@@ -25,11 +35,11 @@ class Driver implements DriverContract
 
     public function search(array $parameters, int $page = 1): array
     {
-        $model = config('openfoodfactsreader.model');
+        $model = $this->modelClass();
 
         $query = $model::query();
 
-        $search_parameters = $model::$search_parameters;
+        $search_parameters = $model::searchParameters();
 
         foreach ($parameters as $key => $value) {
             if (in_array($key, $search_parameters)) {

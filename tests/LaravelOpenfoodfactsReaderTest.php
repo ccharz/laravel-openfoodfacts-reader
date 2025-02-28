@@ -41,4 +41,11 @@ class LaravelOpenfoodfactsReaderTest extends TestCase
 
         $this->assertInstanceOf(ApiV2Driver::class, $test);
     }
+
+    public function test_it_fails_on_invalid_driver(): void
+    {
+        $this->expectExceptionMessage('Invalid driver');
+
+        app(LaravelOpenfoodfactsReader::class)->driver('vtest');
+    }
 }

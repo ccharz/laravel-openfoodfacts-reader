@@ -15,7 +15,6 @@ return RectorConfig::configure()
     ->withRules([
         InlineConstructorDefaultToPropertyRector::class,
     ])
-    ->withPhpSets()
     ->withPreparedSets(
         deadCode: true,
         earlyReturn: true,

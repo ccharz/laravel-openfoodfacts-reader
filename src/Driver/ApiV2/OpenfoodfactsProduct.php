@@ -9,6 +9,10 @@ use Illuminate\Support\Arr;
 
 class OpenfoodfactsProduct implements OpenfoodfactsProductContract
 {
+    /**
+     * @param  array<string, mixed>  $data
+     * @return void
+     */
     public function __construct(protected readonly array $data) {}
 
     public function data(?string $key = null, mixed $default = null): mixed

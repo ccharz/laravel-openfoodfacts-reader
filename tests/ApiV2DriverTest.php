@@ -60,12 +60,10 @@ class ApiV2DriverTest extends TestCase
 
         $this->assertIsArray($result->data());
 
-        Http::assertSent(function (Request $request) {
-            return $request->hasHeader(
-                'User-Agent',
-                'LaravelOpenfoodfactsReader/1.0 (office@cw-software.at)'
-            );
-        });
+        Http::assertSent(fn (Request $request) => $request->hasHeader(
+            'User-Agent',
+            'LaravelOpenfoodfactsReader/1.0 (office@cw-software.at)'
+        ));
     }
 
     public function test_it_throws_with_empty_response(): void
